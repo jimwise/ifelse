@@ -89,7 +89,7 @@ NOTES, below):
         original (Falsey) value the method was called on otherwise. For
         example:
 	
-          h[:foo].if {|x| puts x}	# outputs the value of h[:foo], if present
+          h[:foo].if {|x| puts x}       # outputs the value of h[:foo], if present
 
 +#unless+:: This method takes a block, which will be executed only if the
             object it is called on has a "Falsey" value (either +false+ or +nil+
