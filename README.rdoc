@@ -8,16 +8,129 @@ License::   2-clause BSD-Style (see LICENSE.txt)
 
 == DESCRIPTION:
 
-FIX (describe your package)
+IfElse is an implementation of the pure object-oriented conditional syntax
+found in languages of the SmallTalk family, including Self.  Those languages
+distinguish themselves by taking the "everything is an object / everything
+is a method" approach to a further extreme than Ruby, and getting rid of
+almost all cases of special syntax other than object definition and method
+call.
+
+Ruby, of course, already works this way for some purposes -- thus most Ruby
+developers prefer to write
+
+  [1, 17, 39].each {|x| puts x}
+
+rather than
+
+  for x in [1, 17, 39]
+    puts x
+  end
+
+and
+
+  3.times {|n| puts n}
+
+instead of
+
+  i = 1
+  while i <= 3
+    puts i
+    i += 1
+  end
+
+This module extends that same preference to conditional statements,
+providing replacements for the Ruby keywords +if+, and +unless+:
+
+  x = 1
+  (x >= 0).if {puts 'positive'}
+  (x < 0).unless {puts 'positive'}
+
+Note that as with the built-in special forms these methods replace, these
+methods are available on any Ruby Object, and obey the usual rules of which
+values are considered "Truthy" and "Falsey".
+
+<b>Note that the primary purpose of this gem is to demonstrate that the
+built-in (special form) versions of conditionals provided with Ruby are
+mostly syntactic sugar -- as with the +for+ keyword, there is no real need
+for these to be built into the language.  With that said, the gem is
+fully tested, has no particular performance penalty (beyond the usual cost
+of method dispatch), and should be fully useable in general purpose
+code.</b>
+
+<b>Note also that while Smalltalk-family languages also provide an
+equivalent to the Ruby +else+ keyword, this depends on the more general
+block/lambda capability of those languages, which allow a method to take
+multiple blocks as arguments.  This could be imitated with a syntax like:</b>
+
+  # NOT A REAL EXAMPLE
+  (x > 42).if then: lambda {|x| :big }, else: lambda {|x| :small}
+
+<b>which is true to the SmallTalk original, but feels less Ruby-ish to me, so I
+didn't implement this -- perhaps in a later version.</b>
 
 == REQUIREMENTS:
 
-IfElse has been tested on Ruby 1.9.3 and above (including 2.0.0).  IfElse
-has no other dependencies.
+IfElse has been tested on Ruby 1.9.3 and above (including 2.0.0), though it
+should work fine on earlier versions (drop me an email[mailto:jwise@draga.com]
+if you try it out there).  IfElse has no other dependencies.
 
-== SYNOPSIS:
+== DETAILS:
 
-  FIX (code sample of usage)
+=== Basic Usage
+
+This class provides two methods, implemented on every ruby Object (but see
+NOTES, below):
+
++#if+::
+	This method takes a block, which will be executed only if the object
+	it is called on has a "Truthy" value (neither +false+ nor +nil+ --
+	but see below).  The block may take one argument, which will be
+	passed the value which was tested, if present.  The return value of
+	this method is the value of the block, if it is invoked, or the
+	original (Falsey) value the method was called on otherwise. For example:
+
+	    h[:foo].if {|x| puts x}	# outputs the value of h[:foo], if present
+
++#unless+::
+	This method takes a block, which will be executed only if the object
+	it is called on has a "Falsey" value (either +false+ or +nil+ -- but
+	see below).  The block may take one argument, which will be passed the
+	value which was tested, if present.  The return value of this method
+	is the value of the block, if it is invoked, or the original
+	(Truthy) value the method was called on otherwise. For example:
+
+	    h[:bar].unless {|x| puts 'missing'} # outputs 'missing' if key :bar
+	    		   	 	    	# is not present in h
+
+=== Advanced Usage
+
+As a demonstration of the added flexibility provided by replacing special
+syntax with an object-oriented approach, this gem provides one additional
+feature:  <b>when defining a class, you may decide for yourself whether values
+of that class should be considered "Truthy" or "Falsey"</b>.
+
+This is done by including the Modules +IfElse::TrueIfBehavior+ or
++IfElse::FalseIfBehavior+ in your class (of course, values other than
+'false' and 'nil' are true by default, so you will normally only need to use
+the latter.  For example, after:
+
+  class List
+     ...
+  end
+
+  class Empty List < List
+    include IfElse::FalseIfBehavior
+
+    ...
+  end 
+
+Values of class +EmptyList+ are now Falsey for the purposes of #if and
+#unless, while values of type +List+ remain Truthy.
+
+=== NOTES:
+
+[*] That is, any subclass of Object -- these forms are not available on
+    classes which only subclass BasicObject, to ease implementation.
 
 == INSTALL:
 
