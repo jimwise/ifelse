@@ -1,7 +1,7 @@
 .autotest
 History.txt
 Manifest.txt
-README.md
+README.rdoc
 Rakefile
 bin/ifelse
 lib/ifelse.rb

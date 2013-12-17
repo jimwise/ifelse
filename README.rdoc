@@ -1,26 +1,27 @@
 = ifelse
 
-* FIX (url)
+https://github.com/jimwise/ifelse
+
+Author::    Jim Wise  (mailto:jwise@draga.com)
+Copyright:: Copyright (c) 2013 Jim Wise
+License::   2-clause BSD-Style (see LICENSE.txt)
 
 == DESCRIPTION:
 
 FIX (describe your package)
 
-== FEATURES/PROBLEMS:
+== REQUIREMENTS:
 
-* FIX (list of features or problems)
+IfElse has been tested on Ruby 1.9.3 and above (including 2.0.0).  IfElse
+has no other dependencies.
 
 == SYNOPSIS:
 
   FIX (code sample of usage)
 
-== REQUIREMENTS:
-
-* FIX (list of requirements)
-
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+  $ gem install ifelse
 
 == DEVELOPERS:
 

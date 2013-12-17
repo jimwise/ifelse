@@ -14,7 +14,7 @@ require 'hoe'
 Hoe.spec 'ifelse' do
   developer 'Jim Wise', 'jwise@draga.com'
   license 'BSD'
-  self.readme_file = 'README.md'
+  self.readme_file = 'README.rdoc'
 end
 
 # vim: syntax=ruby
