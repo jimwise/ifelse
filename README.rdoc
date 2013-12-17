@@ -88,7 +88,7 @@ NOTES, below):
         this method is the value of the block, if it is invoked, or the
         original (Falsey) value the method was called on otherwise. For
         example:
-	
+        
           h[:foo].if {|x| puts x}       # outputs the value of h[:foo], if present
 
 +#unless+:: This method takes a block, which will be executed only if the
