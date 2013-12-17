@@ -1,0 +1,8 @@
+.autotest
+History.txt
+Manifest.txt
+README.md
+Rakefile
+bin/ifelse
+lib/ifelse.rb
+test/test_ifelse.rb
