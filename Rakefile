@@ -1,4 +1,4 @@
-# -*- ruby -*-
+@# -*- ruby -*-
 
 require 'rubygems'
 require 'hoe'
@@ -13,7 +13,7 @@ require 'hoe'
 
 Hoe.spec 'ifelse' do
   developer 'Jim Wise', 'jwise@draga.com'
-  license 'BSD'
+  license 'BSD-2-Clause'
   self.readme_file = 'README.rdoc'
 end
 
